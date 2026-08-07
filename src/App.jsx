@@ -1,122 +1,133 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Header from './components/Header';
+import AppRoutes from './routes/AppRoutes';
+import { getTodos, createTodo, updateTodo, deleteTodo } from './services/todoService';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isAdding, setIsAdding] = useState(false);
+
+  // Initial fetch of 10 todos on app mount
+  useEffect(() => {
+    let ignore = false;
+
+    const fetchInitialTasks = async () => {
+      try {
+        const data = await getTodos(10);
+        if (!ignore) {
+          setTasks(data);
+          setError(null);
+        }
+      } catch (err) {
+        if (!ignore) {
+          setError(err.message || 'Unable to load tasks from server. Please try again.');
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchInitialTasks();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  // Retry loading tasks if initial fetch failed
+  const handleRetry = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await getTodos(10);
+      setTasks(data);
+    } catch (err) {
+      setError(err.message || 'Unable to load tasks from server. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handler: Add a new task
+  const handleAddTask = async (title) => {
+    setIsAdding(true);
+    try {
+      const newTodo = await createTodo(title);
+      
+      const uniqueId = tasks.some((t) => String(t.id) === String(newTodo.id))
+        ? Date.now()
+        : newTodo.id;
+
+      const createdTask = {
+        ...newTodo,
+        id: uniqueId,
+        completed: false,
+      };
+
+      setTasks((prevTasks) => [createdTask, ...prevTasks]);
+      return true;
+    } catch (err) {
+      alert(err.message || 'Failed to create task. Please try again.');
+      return false;
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
+  // Handler: Toggle task completed status
+  const handleToggleTask = async (id, completed) => {
+    try {
+      await updateTodo(id, { completed });
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          String(task.id) === String(id) ? { ...task, completed } : task
+        )
+      );
+    } catch (err) {
+      alert(err.message || 'Failed to update task status. Please try again.');
+    }
+  };
+
+  // Handler: Delete a task
+  const handleDeleteTask = async (id) => {
+    try {
+      await deleteTodo(id);
+      setTasks((prevTasks) =>
+        prevTasks.filter((task) => String(task.id) !== String(id))
+      );
+    } catch (err) {
+      alert(err.message || 'Failed to delete task. Please try again.');
+      throw err;
+    }
+  };
+
+  const completedCount = tasks.filter((t) => t.completed).length;
+  const totalCount = tasks.length;
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <Router>
+      <div>
+        <Header completedCount={completedCount} totalCount={totalCount} />
+        <main>
+          <AppRoutes
+            tasks={tasks}
+            isLoading={isLoading}
+            error={error}
+            isAdding={isAdding}
+            onAddTask={handleAddTask}
+            onToggleTask={handleToggleTask}
+            onDeleteTask={handleDeleteTask}
+            onRetry={handleRetry}
+          />
+        </main>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
