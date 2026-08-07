@@ -6,7 +6,7 @@
   
 .app-header {
   background: var(--bg-card);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
   padding: 1.25rem 0;
   box-shadow: var(--shadow-sm);
   position: sticky;
@@ -22,19 +22,25 @@
   align-items: flex-start;
 }
 
-@media (min-width: 640px) {
-  .header-content {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
+
 
 .header-brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
+
+
+
+
+/* 
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem; 
+
+} */
+
 
 .header-icon {
   width: 38px;
@@ -47,7 +53,7 @@
   color: #f0eaea;
   font-weight: 700;
   font-size: 1.2rem;
-  box-shadow: var(--shadow-glow);
+  /* box-shadow: var(--shadow-glow); */
 }
 
 
