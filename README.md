@@ -6,7 +6,7 @@ Developed as a Senior Frontend Engineer coding assignment demonstrating clean ar
 
 ---
 
-## 🚀 Features
+##  Features
 
 - **CRUD Operations**:
   - **Create**: Add new tasks with input validation and instant state update.
@@ -35,7 +35,7 @@ Developed as a Senior Frontend Engineer coding assignment demonstrating clean ar
 
 ---
 
-## 📂 Folder Structure
+##  Folder Structure
 
 ```text
 src/
@@ -65,7 +65,7 @@ src/
 
 ---
 
-## 🌐 API Details
+##  API Details
 
 **Base URL**: `https://jsonplaceholder.typicode.com`
 
@@ -80,7 +80,7 @@ src/
 
 ---
 
-## 💻 Installation & Setup
+##  Installation & Setup
 
 1. **Clone the repository**:
    ```bash
@@ -110,7 +110,7 @@ src/
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 *(Place application screenshots here)*
 
@@ -120,6 +120,6 @@ src/
 
 ---
 
-## 📄 License
+##  License
 
 This project is open source and available under the [MIT License](LICENSE).
