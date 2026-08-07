@@ -110,16 +110,4 @@ src/
 
 ---
 
-##  Screenshots
 
-*(Place application screenshots here)*
-
-| Mobile View | Tablet / Desktop View |
-| :---: | :---: |
-| *[Mobile Screenshot Placeholder]* | *[Desktop Screenshot Placeholder]* |
-
----
-
-##  License
-
-This project is open source and available under the [MIT License](LICENSE).
