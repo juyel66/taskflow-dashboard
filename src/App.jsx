@@ -53,6 +53,8 @@ function App() {
     }
   };
 
+  
+
   // Handler: Add a new task
   const handleAddTask = async (title) => {
     setIsAdding(true);

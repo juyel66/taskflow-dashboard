@@ -36,7 +36,19 @@
   gap: 0.75rem;
 }
 
-
+.header-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--primary) 0%, #2e3dc9 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0eaea;
+  font-weight: 700;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-glow);
+}
 
 
 
@@ -70,9 +82,9 @@
   color: var(--success);
 }
 
-/* ==========================================================================
-   Loading Component
-   ========================================================================== */
+
+   /* Loading Component */
+ 
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -98,9 +110,9 @@
   font-weight: 500;
 }
 
-/* ==========================================================================
-   Error Component
-   ========================================================================== */
+
+   /* Error Component */
+
 .error-container {
   background: rgba(239, 68, 68, 0.08);
   border: 1px solid rgba(239, 68, 68, 0.3);
@@ -160,9 +172,9 @@
   transform: translateY(0);
 }
 
-/* ==========================================================================
-   Empty State Component
-   ========================================================================== */
+
+   /* Empty State Component */
+
 .empty-container {
   background: var(--bg-card);
   border: 1px dashed var(--border-color);
@@ -200,9 +212,8 @@
   max-width: 360px;
 }
 
-/* ==========================================================================
-   AddTask Component
-   ========================================================================== */
+   /* AddTask Component */
+
 .add-task-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -276,9 +287,11 @@
   transform: translateY(0);
 }
 
-/* ==========================================================================
-   TaskList Component
-   ========================================================================== */
+
+
+
+   /* TaskList Component */
+  
 .task-list-container {
   display: flex;
   flex-direction: column;
@@ -307,9 +320,9 @@
   border: 1px solid var(--border-color);
 }
 
-/* ==========================================================================
-   TaskItem Component
-   ========================================================================== */
+
+   /* TaskItem Component */
+
 .task-item {
   background: var(--bg-card);
   border: 1px solid var(--border-color);

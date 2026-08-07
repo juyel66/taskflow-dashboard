@@ -1,8 +1,8 @@
 /* Page Specific Styles */
 
-/* ==========================================================================
-   Task Details Page
-   ========================================================================== */
+
+   /* Task Details Page */
+
 .task-details-wrapper {
   margin-top: 1.5rem;
   animation: fadeIn var(--transition-normal);

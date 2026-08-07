@@ -2,10 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import TaskDetails from '../pages/TaskDetails';
 
-/**
- * Application routing component.
- * Passes shared task state and CRUD handlers to pages.
- */
+
 const AppRoutes = ({
   tasks,
   isLoading,
