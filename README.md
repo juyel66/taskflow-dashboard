@@ -6,6 +6,39 @@ Developed as a Senior Frontend Engineer coding assignment demonstrating clean ar
 
 ---
 
+
+##  Installation & Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd taskflow-dashboard
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+5. **Run linter**:
+   ```bash
+   npm run lint
+   ```
+
+---
+
+
+
 ##  Features
 
 - **CRUD Operations**:
@@ -80,34 +113,5 @@ src/
 
 ---
 
-##  Installation & Setup
-
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd taskflow-dashboard
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for production**:
-   ```bash
-   npm run build
-   ```
-
-5. **Run linter**:
-   ```bash
-   npm run lint
-   ```
-
----
 
 
