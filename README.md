@@ -1,16 +1,125 @@
-# React + Vite
+# TaskFlow Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, production-quality, responsive Task Management Dashboard built with **React**, **React Router DOM**, **Axios**, and **Plain CSS**.
 
-Currently, two official plugins are available:
+Developed as a Senior Frontend Engineer coding assignment demonstrating clean architecture, component reusability, asynchronous state management, and mobile-first responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **CRUD Operations**:
+  - **Create**: Add new tasks with input validation and instant state update.
+  - **Read**: Fetch initial 10 todo items from JSONPlaceholder API.
+  - **Update**: Toggle task completion status with line-through styling and top header counter update.
+  - **Delete**: Remove tasks directly from the Dashboard or from the Task Details view.
+- **Routing**: Client-side navigation via React Router DOM (`/` Dashboard, `/tasks/:id` Task Details).
+- **Comprehensive UI States**:
+  - **Loading State**: Animated spinner indicator during API requests.
+  - **Error State**: Friendly error alert with retry button for seamless error recovery.
+  - **Empty State**: Visual illustration when no tasks are present.
+- **UX & Accessibility**:
+  - Interactive hover effects and transitions.
+  - Dynamic button disabling while requests are in-flight.
+  - Responsive mobile-first layout (Mobile, Tablet, Desktop).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠 Tech Stack
+
+- **Framework**: React 19
+- **Routing**: React Router DOM v7
+- **HTTP Client**: Axios
+- **Styling**: Plain CSS (Custom CSS Variables, Flexbox/Grid, Animations)
+- **Build Tool**: Vite
+
+---
+
+## 📂 Folder Structure
+
+```text
+src/
+├── assets/
+├── components/
+│   ├── AddTask.jsx       # Controlled task creation form
+│   ├── Empty.jsx         # Empty state view
+│   ├── Error.jsx         # Error state alert with retry
+│   ├── Header.jsx        # App header & task completion counter
+│   ├── Loading.jsx       # Loading spinner state
+│   ├── TaskItem.jsx      # Individual task card with toggle & delete
+│   └── TaskList.jsx      # Task collection renderer
+├── pages/
+│   ├── Dashboard.jsx     # Main dashboard view & CRUD handlers
+│   └── TaskDetails.jsx   # Detailed single task view
+├── routes/
+│   └── AppRoutes.jsx     # React Router DOM configuration
+├── services/
+│   └── todoService.js    # Dedicated Axios API service
+├── styles/
+│   ├── components.css    # Reusable component styles
+│   ├── global.css        # Design tokens & global resets
+│   └── pages.css         # Page-specific layout styles
+├── App.jsx               # Main application container & router
+└── main.jsx              # Entry point
+```
+
+---
+
+## 🌐 API Details
+
+**Base URL**: `https://jsonplaceholder.typicode.com`
+
+**Endpoints Used**:
+- `GET /todos?_limit=10` - Fetch initial task list
+- `GET /todos/:id` - Fetch details for a specific task
+- `POST /todos` - Create a new task item
+- `PATCH /todos/:id` - Update completion status
+- `DELETE /todos/:id` - Remove task item
+
+> *Note: JSONPlaceholder simulates CRUD requests and does not persist backend data. The application updates local React state immediately upon successful HTTP requests to provide real-time UI feedback.*
+
+---
+
+## 💻 Installation & Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd taskflow-dashboard
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+5. **Run linter**:
+   ```bash
+   npm run lint
+   ```
+
+---
+
+## 📸 Screenshots
+
+*(Place application screenshots here)*
+
+| Mobile View | Tablet / Desktop View |
+| :---: | :---: |
+| *[Mobile Screenshot Placeholder]* | *[Desktop Screenshot Placeholder]* |
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
