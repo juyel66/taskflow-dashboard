@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 /**
  * TaskItem Component displays an individual todo with completion toggle and delete button.
@@ -66,7 +67,7 @@ const TaskItem = ({ task, onToggleTask, onDeleteTask }) => {
             <span>Deleting...</span>
           ) : (
             <>
-              <span aria-hidden="true">🗑</span> Delete
+              <RiDeleteBin6Line /> Delete
             </>
           )}
         </button>

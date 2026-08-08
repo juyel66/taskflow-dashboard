@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import { getTodoById } from '../services/todoService';
@@ -165,7 +166,7 @@ const TaskDetails = ({ tasks = [], onDeleteTask }) => {
               <span>Deleting task...</span>
             ) : (
               <>
-                <span aria-hidden="true">🗑</span> Delete Task
+                <RiDeleteBin6Line /> Delete Task
               </>
             )}
           </button>
