@@ -117,5 +117,6 @@ taskflow-dashboard/
 ├── eslint.config.js
 ├── index.html
 ├── package.json
+├── vercel.json
 └── vite.config.js
 ```
