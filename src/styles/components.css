@@ -6,13 +6,8 @@
   
 .app-header {
   background: var(--bg-card);
-<<<<<<< HEAD
   border-bottom: 1px solid var(--border-color);
   padding: 0.75rem 0;
-=======
-  border-bottom: 2px solid var(--border-color);
-  
->>>>>>> 81eef51641b752f06dedf06a4af0c4038567a8f4
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
@@ -41,18 +36,6 @@
   gap: 0.65rem;
 }
 
-
-
-
-/* 
-.header-stats {
-  display: flex;
-  align-items: center;
-  gap: 1rem; 
-
-} */
-
-
 .header-icon {
   width: 32px;
   height: 32px;
@@ -63,13 +46,8 @@
   justify-content: center;
   color: #f0eaea;
   font-weight: 700;
-<<<<<<< HEAD
   font-size: 1rem;
   box-shadow: var(--shadow-glow);
-=======
-  font-size: 1.2rem;
-  /* box-shadow: var(--shadow-glow); */
->>>>>>> 81eef51641b752f06dedf06a4af0c4038567a8f4
 }
 
 .header-title {

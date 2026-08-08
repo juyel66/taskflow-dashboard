@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { FaArrowLeft } from 'react-icons/fa6';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 import { getTodoById } from '../services/todoService';
@@ -20,35 +21,41 @@ const TaskDetails = ({ tasks = [], onDeleteTask }) => {
   const [task, setTask] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isNotFound, setIsNotFound] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Load task details: check local state first, fallback to API call if missing
   useEffect(() => {
     let ignore = false;
 
     const loadTaskDetails = async () => {
-      // 1. Check if task exists in central tasks state (e.g. newly created tasks or loaded tasks)
       const localTask = tasks.find((t) => String(t.id) === String(id));
 
       if (localTask) {
         if (!ignore) {
           setTask(localTask);
           setError(null);
+          setIsNotFound(false);
           setIsLoading(false);
         }
         return;
       }
 
-      // 2. Fallback: fetch from API if not present in local state
       try {
         const data = await getTodoById(id);
         if (!ignore) {
           setTask(data);
           setError(null);
+          setIsNotFound(false);
         }
       } catch (err) {
         if (!ignore) {
-          setError(err.message || `Failed to fetch details for task #${id}.`);
+          if (err.response?.status === 404) {
+            setIsNotFound(true);
+            setError(null);
+          } else {
+            setError(err.message || `Failed to fetch details for task #${id}.`);
+            setIsNotFound(false);
+          }
         }
       } finally {
         if (!ignore) {
@@ -64,21 +71,24 @@ const TaskDetails = ({ tasks = [], onDeleteTask }) => {
     };
   }, [id, tasks]);
 
-  // Retry fetching task details from API if failed
   const handleRetry = async () => {
     setIsLoading(true);
     setError(null);
+    setIsNotFound(false);
     try {
       const data = await getTodoById(id);
       setTask(data);
     } catch (err) {
-      setError(err.message || `Failed to fetch details for task #${id}.`);
+      if (err.response?.status === 404) {
+        setIsNotFound(true);
+      } else {
+        setError(err.message || `Failed to fetch details for task #${id}.`);
+      }
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Handle task deletion from detail view
   const handleDelete = async () => {
     if (isDeleting) return;
     setIsDeleting(true);
@@ -102,7 +112,7 @@ const TaskDetails = ({ tasks = [], onDeleteTask }) => {
     return (
       <div className="container">
         <Link to="/" className="back-link">
-          ← Back to Dashboard
+          <FaArrowLeft /> Back to Dashboard
         </Link>
         <Error
           title="Task Load Error"
@@ -113,15 +123,15 @@ const TaskDetails = ({ tasks = [], onDeleteTask }) => {
     );
   }
 
-  if (!task) {
+  if (isNotFound || !task) {
     return (
       <div className="container">
         <Link to="/" className="back-link">
-          ← Back to Dashboard
+          <FaArrowLeft /> Back to Dashboard
         </Link>
         <Error
           title="Task Not Found"
-          message={`No task with ID #${id} could be located.`}
+          message="This task is no longer available from the API."
         />
       </div>
     );
@@ -130,7 +140,7 @@ const TaskDetails = ({ tasks = [], onDeleteTask }) => {
   return (
     <div className="container task-details-wrapper">
       <Link to="/" className="back-link">
-        ← Back to Dashboard
+        <FaArrowLeft /> Back to Dashboard
       </Link>
 
       <div className="task-details-card">
